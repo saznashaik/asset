@@ -8,7 +8,7 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   const menuItems = [
-    { href: '/dashboard', label: 'Asset Management', icon: LayoutDashboard, startsWith: '/dashboard' },
+    { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, startsWith: '/dashboard' },
     { href: '/chatbot', label: 'Chat AI', icon: MessageCircle, startsWith: '/chatbot' },
   ];
 
