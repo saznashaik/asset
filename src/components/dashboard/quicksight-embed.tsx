@@ -1,16 +1,12 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
 export function QuickSightEmbed() {
   const embedUrl = "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/430248170338/dashboards/f9ae3294-c908-483f-91ef-8469921e94e7?directory_alias=Keerthisri"; 
 
   return (
-    <Card className="shadow-sm h-[800px] w-full">
-      <CardHeader>
-        <CardTitle>Asset Management Overview</CardTitle>
-      </CardHeader>
-      <CardContent className="h-full pb-6">
+    <Card className="h-[calc(100vh-4rem)] w-full border-0 rounded-none">
         <iframe
           src={embedUrl}
           height="100%"
@@ -19,7 +15,6 @@ export function QuickSightEmbed() {
           scrolling="no"
           title="QuickSight Dashboard"
         ></iframe>
-      </CardContent>
     </Card>
   );
 }
