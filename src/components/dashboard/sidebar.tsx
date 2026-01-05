@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bot, LayoutDashboard } from 'lucide-react';
+import { Bot, LayoutDashboard, MessageSquare } from 'lucide-react';
 import { Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 
 export function AppSidebar() {
@@ -10,15 +10,23 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <Link href="/dashboard" className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
+        <Link href="/" className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
             <div className="bg-primary text-primary-foreground rounded-lg p-2">
                 <Bot size={24} />
             </div>
-            <span className="text-lg font-semibold text-sidebar-foreground group-data-[collapsible=icon]:hidden">QuickSight AI</span>
+            <span className="text-lg font-semibold text-sidebar-foreground group-data-[collapsible=icon]:hidden">AssetAI</span>
         </Link>
       </SidebarHeader>
       <SidebarContent className="p-2">
         <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild isActive={pathname === '/'} tooltip="Chatbot">
+              <Link href="/">
+                <MessageSquare />
+                Chatbot
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard')} tooltip="Dashboard">
               <Link href="/dashboard">

@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Bot, User, CornerDownLeft, Loader2 } from 'lucide-react';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 type Message = {
   id: number;
@@ -31,9 +31,9 @@ function SubmitButton() {
   );
 }
 
-export function ChatAgentDialog({ children, open, onOpenChange }: { children: React.ReactNode, open: boolean, onOpenChange: (open: boolean) => void }) {
+export function ChatPageContent() {
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, role: 'ai', content: 'Hello! How can I help you analyze your data today?' }
+    { id: 1, role: 'ai', content: 'Hello! How can I help you analyze your assets today?' }
   ]);
   const [state, formAction] = useFormState(askQuestionAction, initialState);
   const formRef = useRef<HTMLFormElement>(null);
@@ -63,14 +63,12 @@ export function ChatAgentDialog({ children, open, onOpenChange }: { children: Re
   };
   
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] h-[80vh] flex flex-col p-0">
-        <DialogHeader className="p-6 pb-2 border-b">
-          <DialogTitle>Ask Executive AI</DialogTitle>
-          <DialogDescription>Ask questions about your data in natural language.</DialogDescription>
-        </DialogHeader>
-        <div className="flex-1 min-h-0">
+    <div className="h-full flex flex-col p-4 sm:p-6 lg:p-8">
+      <Card className="flex-1 flex flex-col h-full">
+        <CardHeader>
+          <CardTitle>Chat with AssetAI</CardTitle>
+        </CardHeader>
+        <CardContent className="flex-1 min-h-0">
           <ScrollArea className="h-full">
             <div className="p-6 space-y-4" ref={scrollViewportRef}>
               {messages.map((message) => (
@@ -92,14 +90,14 @@ export function ChatAgentDialog({ children, open, onOpenChange }: { children: Re
               ))}
             </div>
           </ScrollArea>
-        </div>
-        <DialogFooter className="p-6 pt-2 border-t">
+        </CardContent>
+        <CardFooter className="border-t pt-6">
           <form action={handleFormSubmit} ref={formRef} className="flex w-full items-center space-x-2">
-            <Input name="question" placeholder="e.g., What were the total sales last quarter?" className="flex-1" autoComplete="off" />
+            <Input name="question" placeholder="e.g., What is the total value of our assets?" className="flex-1" autoComplete="off" />
             <SubmitButton />
           </form>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

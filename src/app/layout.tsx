@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'QuickSight Executive AI',
-  description: 'AI-powered executive dashboard for QuickSight.',
+  title: 'AssetAI',
+  description: 'AI-powered asset management.',
 };
 
 export default function RootLayout({
