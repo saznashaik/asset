@@ -1,66 +1,77 @@
 "use client"
 
 import type { ReactNode } from 'react';
-import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { DollarSign, Users, TrendingUp, TrendingDown, Activity, Star } from 'lucide-react';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Line, LineChart } from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Line, LineChart, Tooltip } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import type { ChartConfig } from '@/components/ui/chart';
-import { placeholderImages } from '@/lib/placeholder-images';
+import { AlertTriangle, Archive, Blocks, Bot, Clock, Cog, Wrench } from 'lucide-react';
+import { AIQuery } from '@/components/ai/ai-query';
 
 type StatCardProps = {
     title: string;
     value: string;
-    change: string;
+    change?: string;
     icon: ReactNode;
-    changeType: 'increase' | 'decrease';
+    changeType?: 'increase' | 'decrease';
+    details: string;
+    iconBgColor: string;
 };
 
-function StatCard({ title, value, change, icon, changeType }: StatCardProps) {
+function StatCard({ title, value, change, icon, changeType, details, iconBgColor }: StatCardProps) {
     const isIncrease = changeType === 'increase';
+    const changeColor = isIncrease ? 'text-green-600' : 'text-red-600';
     return (
-        <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{title}</CardTitle>
-                {icon}
+        <Card className="shadow-sm">
+            <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
+                <div className="space-y-1">
+                    <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+                    <div className="text-3xl font-bold">{value}</div>
+                </div>
+                <div className={`p-2 rounded-md ${iconBgColor}`}>
+                    {icon}
+                </div>
             </CardHeader>
             <CardContent>
-                <div className="text-2xl font-bold">{value}</div>
-                <p className={`text-xs text-muted-foreground flex items-center ${isIncrease ? 'text-green-600' : 'text-red-600'}`}>
-                    {isIncrease ? <TrendingUp className="h-4 w-4 mr-1" /> : <TrendingDown className="h-4 w-4 mr-1" />}
-                    {change} from last month
-                </p>
+                {change && (
+                  <div className="text-xs font-medium flex items-center">
+                    <span className={changeColor}>{change}</span>
+                  </div>
+                )}
+                <p className="text-xs text-muted-foreground mt-1">{details}</p>
             </CardContent>
         </Card>
     );
 }
 
-const salesData = [
-    { month: 'Jan', sales: 4000 }, { month: 'Feb', sales: 3000 },
-    { month: 'Mar', sales: 5000 }, { month: 'Apr', sales: 4500 },
-    { month: 'May', sales: 6000 }, { month: 'Jun', sales: 5500 },
-    { month: 'Jul', sales: 6500 }, { month: 'Aug', sales: 7000 },
+const assetsByCategoryData = [
+    { name: 'Servers', value: 4231, fill: 'var(--color-chart-1)' },
+    { name: 'Workstations', value: 5892, fill: 'var(--color-chart-1)' },
+    { name: 'Network', value: 2724, fill: 'var(--color-chart-1)' },
+    { name: 'Mobile', value: 1843, fill: 'var(--color-chart-1)' },
+    { name: 'Other', value: 954, fill: 'var(--color-chart-1)' },
 ];
-const salesChartConfig = {
-  sales: { label: "Sales", color: "hsl(var(--accent))" },
+const assetsChartConfig = {
+  value: { label: "Assets" },
 } satisfies ChartConfig
 
-function SalesChart() {
+function AssetsByCategoryChart() {
     return (
-        <Card>
+        <Card className="shadow-sm">
             <CardHeader>
-                <CardTitle>Sales Overview</CardTitle>
-                <CardDescription>Last 8 months performance</CardDescription>
+                <CardTitle>Assets by Category</CardTitle>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={salesChartConfig} className="h-[250px] w-full">
-                    <BarChart data={salesData} accessibilityLayer>
-                        <CartesianGrid vertical={false} />
-                        <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
-                        <YAxis tickLine={false} axisLine={false} tickMargin={10} tickFormatter={(value) => `$${value / 1000}K`} />
-                        <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
-                        <Bar dataKey="sales" fill="var(--color-sales)" radius={8} />
+                <ChartContainer config={assetsChartConfig} className="h-[250px] w-full">
+                    <BarChart data={assetsByCategoryData} accessibilityLayer layout="vertical" margin={{ left: 10, right: 30 }}>
+                        <CartesianGrid horizontal={false} />
+                        <YAxis dataKey="name" type="category" tickLine={false} axisLine={false} tickMargin={10} />
+                        <XAxis type="number" dataKey="value" hide />
+                        <Tooltip
+                            cursor={{ fill: 'hsl(var(--muted))' }}
+                            content={<ChartTooltipContent indicator="dot" />}
+                        />
+                        <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20} />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
@@ -68,30 +79,31 @@ function SalesChart() {
     );
 }
 
-const satisfactionData = [
-  { date: 'Wk 1', score: 92 }, { date: 'Wk 2', score: 94 },
-  { date: 'Wk 3', score: 93 }, { date: 'Wk 4', score: 95 },
-  { date: 'Wk 5', score: 96 }, { date: 'Wk 6', score: 94 },
+const repairCostData = [
+  { month: 'Jan', cost: 198 }, { month: 'Feb', cost: 224 },
+  { month: 'Mar', cost: 201 }, { month: 'Apr', cost: 245 },
+  { month: 'May', cost: 230 }, { month: 'Jun', cost: 260 },
+  { month: 'Jul', cost: 290 }, { month: 'Aug', cost: 275 },
 ];
-const satisfactionChartConfig = {
-  score: { label: "Score", color: "hsl(var(--primary))" },
+
+const repairCostChartConfig = {
+  cost: { label: "Repair Cost", color: "hsl(var(--primary))" },
 } satisfies ChartConfig
 
-function CustomerSatisfactionChart() {
+function RepairCostTrendChart() {
     return (
-        <Card>
+        <Card className="shadow-sm">
             <CardHeader>
-                <CardTitle>Customer Satisfaction</CardTitle>
-                 <CardDescription>Weekly CSAT score</CardDescription>
+                <CardTitle>Repair Cost Trend</CardTitle>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={satisfactionChartConfig} className="h-[250px] w-full">
-                    <LineChart data={satisfactionData} accessibilityLayer margin={{ left: -20, right: 20 }}>
-                        <CartesianGrid vertical={false} />
-                        <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={10} />
-                        <YAxis domain={[85, 100]} tickLine={false} axisLine={false} tickMargin={10} />
-                        <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-                        <Line type="monotone" dataKey="score" stroke="var(--color-score)" strokeWidth={2} dot={{ r: 5, fill: "var(--color-score)" }} activeDot={{ r: 7 }} />
+                <ChartContainer config={repairCostChartConfig} className="h-[250px] w-full">
+                    <LineChart data={repairCostData} accessibilityLayer margin={{ left: -20, right: 20 }}>
+                        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                        <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />
+                        <YAxis domain={[150, 350]} tickLine={false} axisLine={false} tickMargin={10} tickFormatter={(value) => `$${value}K`} />
+                        <Tooltip cursor={{ stroke: 'hsl(var(--border))', strokeWidth: 1, strokeDasharray: '3 3' }} content={<ChartTooltipContent indicator="dot" />} />
+                        <Line type="monotone" dataKey="cost" stroke="hsl(var(--primary))" strokeWidth={2} dot={{ r: 4, fill: "hsl(var(--primary))" }} activeDot={{ r: 6 }} />
                     </LineChart>
                 </ChartContainer>
             </CardContent>
@@ -99,51 +111,52 @@ function CustomerSatisfactionChart() {
     );
 }
 
-function QuickSightDashboard({ id, title }: { id: string; title: string }) {
-    const image = placeholderImages.find(img => img.id === id);
-
-    return (
-        <Card className="overflow-hidden">
-            <CardHeader>
-                <CardTitle>{title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-                {image ? (
-                    <div className="aspect-video overflow-hidden rounded-lg border">
-                        <Image
-                            src={image.imageUrl}
-                            alt={image.description}
-                            width={800}
-                            height={450}
-                            className="w-full h-full object-cover transition-transform hover:scale-105"
-                            data-ai-hint={image.imageHint}
-                        />
-                    </div>
-                ) : <div className="aspect-video bg-muted rounded-lg flex items-center justify-center"><p>Image not found</p></div>}
-            </CardContent>
-        </Card>
-    );
-}
 
 export function DashboardContent() {
     return (
         <div className="space-y-6">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <StatCard title="Total Revenue" value="$45,231.89" change="+20.1%" icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} changeType="increase" />
-                <StatCard title="New Customers" value="+2,350" change="+180.1%" icon={<Users className="h-4 w-4 text-muted-foreground" />} changeType="increase" />
-                <StatCard title="Avg. Response Time" value="32s" change="-2.4%" icon={<Activity className="h-4 w-4 text-muted-foreground" />} changeType="decrease" />
-                <StatCard title="Satisfaction Score" value="98.2%" change="+1.2%" icon={<Star className="h-4 w-4 text-muted-foreground" />} changeType="increase" />
+            <AIQuery />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                <StatCard
+                  title="Total Assets"
+                  value="12,847"
+                  change="+5.2%"
+                  icon={<Blocks className="h-6 w-6 text-blue-500" />}
+                  iconBgColor="bg-blue-100"
+                  details="Servers: 4,231 | Workstations: 5,892"
+                  changeType="increase"
+                />
+                <StatCard
+                  title="High-Risk Assets"
+                  value="247"
+                  change="+12.3%"
+                  icon={<AlertTriangle className="h-6 w-6 text-red-500" />}
+                  iconBgColor="bg-red-100"
+                  details="Critical: 47 | High: 124"
+                  changeType="increase"
+                />
+                <StatCard
+                  title="Repair Cost (12M)"
+                  value="$847K"
+                  change="+8.1%"
+                  icon={<Wrench className="h-6 w-6 text-orange-500" />}
+                  iconBgColor="bg-orange-100"
+                  details="Q1: $198K | Q2: $224K"
+                  changeType="increase"
+                />
+                <StatCard
+                  title="Avg Downtime/Asset"
+                  value="4.2h"
+                  change="-3.2%"
+                  icon={<Clock className="h-6 w-6 text-purple-500" />}
+                  iconBgColor="bg-purple-100"
+                  details="Target: <3h | Best: 1.8h"
+                  changeType="decrease"
+                />
             </div>
-            <div className="grid gap-4 lg:grid-cols-2">
-                <SalesChart />
-                <CustomerSatisfactionChart />
-            </div>
-             <div>
-                <h2 className="text-2xl font-semibold tracking-tight mb-4">QuickSight Dashboards</h2>
-                <div className="grid gap-4 lg:grid-cols-2">
-                    <QuickSightDashboard id="qsd-1" title="Regional Performance" />
-                    <QuickSightDashboard id="qsd-2" title="Product Analytics" />
-                </div>
+            <div className="grid gap-6 lg:grid-cols-2">
+                <AssetsByCategoryChart />
+                <RepairCostTrendChart />
             </div>
         </div>
     );

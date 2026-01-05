@@ -6,7 +6,7 @@ import { SidebarProvider } from '@/components/ui/sidebar';
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider defaultOpen>
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen bg-background">
             <AppSidebar />
             <div className="flex flex-col flex-1">
                 <Header />
