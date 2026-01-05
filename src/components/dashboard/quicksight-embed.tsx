@@ -3,8 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function QuickSightEmbed() {
-  // TODO: Replace with your QuickSight embed URL
-  const embedUrl = "https://your-quicksight-url.quicksight.aws.amazon.com/embed/12345/dashboards/67890"; 
+  const embedUrl = "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/430248170338/dashboards/f9ae3294-c908-483f-91ef-8469921e94e7?directory_alias=Keerthisri"; 
 
   return (
     <Card className="shadow-sm h-[800px] w-full">
