@@ -3,19 +3,18 @@
 
 import { QuickSightEmbed } from '@/components/dashboard/quicksight-embed';
 import { KpiCard } from '@/components/dashboard/kpi-card';
-import { DollarSign, ShieldAlert, Hammer, CalendarClock } from 'lucide-react';
+import { Server, ShieldAlert, Hammer, CalendarClock, DollarSign } from 'lucide-react';
 
 const kpiData = [
   {
     title: 'Total Assets',
     value: '2,000',
-    icon: DollarSign,
+    icon: Server,
   },
   {
     title: 'High Risk & Critical Risks',
     value: '500',
     icon: ShieldAlert,
-    change: ' ',
     changeType: 'increase' as const,
   },
   {

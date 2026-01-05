@@ -14,11 +14,11 @@ interface KpiCardProps {
 
 export function KpiCard({ title, value, icon: Icon, change, changeType }: KpiCardProps) {
     return (
-        <Card className="shadow-sm">
+        <Card className="shadow-lg shadow-black/5 bg-card/60 backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:shadow-primary/20 hover:shadow-2xl">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{title}</CardTitle>
                 <Icon className={cn("h-5 w-5 text-muted-foreground", {
-                    'text-red-500': changeType === 'increase',
+                    'text-destructive': changeType === 'increase',
                     'text-green-500': changeType === 'decrease'
                 })} />
             </CardHeader>
