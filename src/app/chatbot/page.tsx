@@ -35,13 +35,13 @@ const kpiData = [
 
 export default function ChatbotPage() {
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 h-full">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {kpiData.map((kpi) => (
                     <KpiCard key={kpi.title} {...kpi} />
                 ))}
             </div>
-            <div className="aspect-video w-full">
+            <div className="flex-1 min-h-0">
                 <iframe 
                     className="w-full h-full border-0 rounded-lg"
                     src="https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/430248170338/chatagents/15dcd6d3-12e0-4bcc-b0bb-999a4a3de9c3?directory_alias=Keerthisri">
