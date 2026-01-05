@@ -2,11 +2,10 @@
 
 import type { ReactNode } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Line, LineChart, Tooltip } from 'recharts';
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Line, LineChart, Tooltip } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import type { ChartConfig } from '@/components/ui/chart';
-import { AlertTriangle, Archive, Blocks, Bot, Clock, Cog, Wrench } from 'lucide-react';
-import { AIQuery } from '@/components/ai/ai-query';
+import { AlertTriangle, Blocks, Clock, Wrench } from 'lucide-react';
 
 type StatCardProps = {
     title: string;
@@ -115,7 +114,6 @@ function RepairCostTrendChart() {
 export function DashboardContent() {
     return (
         <div className="space-y-6">
-            <AIQuery />
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <StatCard
                   title="Total Assets"

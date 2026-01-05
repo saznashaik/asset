@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Archive, Bot, Cog, LayoutDashboard, User } from 'lucide-react';
+import { Bot, LayoutDashboard, MessageCircle, User } from 'lucide-react';
 import { Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
@@ -11,9 +11,8 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   const menuItems = [
-    { href: '/', label: 'Executive Dashboard', icon: LayoutDashboard, startsWith: '/dashboard' },
-    { href: '/inventory', label: 'Asset Inventory', icon: Archive, startsWith: '/inventory' },
-    { href: '/admin', label: 'Administration', icon: Cog, startsWith: '/admin' },
+    { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, startsWith: '/dashboard' },
+    { href: '/chatbot', label: 'Chat AI', icon: MessageCircle, startsWith: '/chatbot' },
   ];
 
   return (
