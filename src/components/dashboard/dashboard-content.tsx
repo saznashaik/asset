@@ -2,10 +2,8 @@
 
 import type { ReactNode } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Line, LineChart, Tooltip } from 'recharts';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { AlertTriangle, Blocks, Clock, Wrench } from 'lucide-react';
+import { QuickSightEmbed } from '@/components/dashboard/quicksight-embed';
 
 type StatCardProps = {
     title: string;
@@ -42,74 +40,6 @@ function StatCard({ title, value, change, icon, changeType, details, iconBgColor
         </Card>
     );
 }
-
-const assetsByCategoryData = [
-    { name: 'Servers', value: 4231, fill: 'var(--color-chart-1)' },
-    { name: 'Workstations', value: 5892, fill: 'var(--color-chart-1)' },
-    { name: 'Network', value: 2724, fill: 'var(--color-chart-1)' },
-    { name: 'Mobile', value: 1843, fill: 'var(--color-chart-1)' },
-    { name: 'Other', value: 954, fill: 'var(--color-chart-1)' },
-];
-const assetsChartConfig = {
-  value: { label: "Assets" },
-} satisfies ChartConfig
-
-function AssetsByCategoryChart() {
-    return (
-        <Card className="shadow-sm">
-            <CardHeader>
-                <CardTitle>Assets by Category</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <ChartContainer config={assetsChartConfig} className="h-[250px] w-full">
-                    <BarChart data={assetsByCategoryData} accessibilityLayer layout="vertical" margin={{ left: 10, right: 30 }}>
-                        <CartesianGrid horizontal={false} />
-                        <YAxis dataKey="name" type="category" tickLine={false} axisLine={false} tickMargin={10} />
-                        <XAxis type="number" dataKey="value" hide />
-                        <Tooltip
-                            cursor={{ fill: 'hsl(var(--muted))' }}
-                            content={<ChartTooltipContent indicator="dot" />}
-                        />
-                        <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20} />
-                    </BarChart>
-                </ChartContainer>
-            </CardContent>
-        </Card>
-    );
-}
-
-const repairCostData = [
-  { month: 'Jan', cost: 198 }, { month: 'Feb', cost: 224 },
-  { month: 'Mar', cost: 201 }, { month: 'Apr', cost: 245 },
-  { month: 'May', cost: 230 }, { month: 'Jun', cost: 260 },
-  { month: 'Jul', cost: 290 }, { month: 'Aug', cost: 275 },
-];
-
-const repairCostChartConfig = {
-  cost: { label: "Repair Cost", color: "hsl(var(--primary))" },
-} satisfies ChartConfig
-
-function RepairCostTrendChart() {
-    return (
-        <Card className="shadow-sm">
-            <CardHeader>
-                <CardTitle>Repair Cost Trend</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <ChartContainer config={repairCostChartConfig} className="h-[250px] w-full">
-                    <LineChart data={repairCostData} accessibilityLayer margin={{ left: -20, right: 20 }}>
-                        <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                        <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />
-                        <YAxis domain={[150, 350]} tickLine={false} axisLine={false} tickMargin={10} tickFormatter={(value) => `$${value}K`} />
-                        <Tooltip cursor={{ stroke: 'hsl(var(--border))', strokeWidth: 1, strokeDasharray: '3 3' }} content={<ChartTooltipContent indicator="dot" />} />
-                        <Line type="monotone" dataKey="cost" stroke="hsl(var(--primary))" strokeWidth={2} dot={{ r: 4, fill: "hsl(var(--primary))" }} activeDot={{ r: 6 }} />
-                    </LineChart>
-                </ChartContainer>
-            </CardContent>
-        </Card>
-    );
-}
-
 
 export function DashboardContent() {
     return (
@@ -152,9 +82,8 @@ export function DashboardContent() {
                   changeType="decrease"
                 />
             </div>
-            <div className="grid gap-6 lg:grid-cols-2">
-                <AssetsByCategoryChart />
-                <RepairCostTrendChart />
+            <div className="grid gap-6 lg:grid-cols-1">
+                <QuickSightEmbed />
             </div>
         </div>
     );
