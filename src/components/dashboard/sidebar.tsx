@@ -11,7 +11,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader className="p-4">
         <Link href="/" className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
-            <div className="bg-primary text-primary-foreground rounded-lg p-2">
+            <div className="bg-primary-foreground text-primary rounded-lg p-2">
                 <Bot size={24} />
             </div>
             <span className="text-lg font-semibold text-sidebar-foreground group-data-[collapsible=icon]:hidden">AssetAI</span>
