@@ -13,7 +13,7 @@ const kpiData = [
     title: 'High Risk & Critical Risks',
     value: '500',
     icon: ShieldAlert,
-    change: 'Critical',
+    change: ' ',
     changeType: 'increase' as const,
   },
   {
@@ -41,7 +41,7 @@ export default function ChatbotPage() {
                     <KpiCard key={kpi.title} {...kpi} />
                 ))}
             </div>
-            <div className="h-[calc(100vh-24rem)]">
+            <div className="aspect-video w-full">
                 <iframe 
                     className="w-full h-full border-0 rounded-lg"
                     src="https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/430248170338/chatagents/15dcd6d3-12e0-4bcc-b0bb-999a4a3de9c3?directory_alias=Keerthisri">

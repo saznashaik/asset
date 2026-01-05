@@ -15,7 +15,7 @@ const kpiData = [
     title: 'High Risk & Critical Risks',
     value: '500',
     icon: ShieldAlert,
-    change: 'Critical',
+    change: ' ',
     changeType: 'increase' as const,
   },
   {
@@ -43,7 +43,7 @@ export function DashboardContent() {
                     <KpiCard key={kpi.title} {...kpi} />
                 ))}
             </div>
-            <div className="h-[calc(100vh-16rem)]">
+            <div className="aspect-video w-full">
                 <QuickSightEmbed />
             </div>
         </div>

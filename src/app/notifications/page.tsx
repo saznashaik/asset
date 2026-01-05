@@ -12,7 +12,7 @@ const kpiData = [
     title: 'High Risk & Critical Risks',
     value: '500',
     icon: ShieldAlert,
-    change: 'Critical',
+    change: ' ',
     changeType: 'increase' as const,
   },
   {
