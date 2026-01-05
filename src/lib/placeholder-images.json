@@ -1,3 +1,16 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "qsd-1",
+      "description": "A dashboard showing regional performance with maps and bar charts.",
+      "imageUrl": "https://images.unsplash.com/photo-1737317312147-9fae2ed01487?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bWFwJTIwY2hhcnRzfGVufDB8fHx8MTc2NzU5OTIxOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "map charts"
+    },
+    {
+      "id": "qsd-2",
+      "description": "A dashboard showing product analytics with pie charts and line graphs.",
+      "imageUrl": "https://images.unsplash.com/photo-1762427354251-f008b64dbc32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwaWUlMjBjaGFydHN8ZW58MHx8fHwxNzY3NTk5MjE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pie charts"
+    }
+  ]
 }
