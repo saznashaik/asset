@@ -1,10 +1,8 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bot, LayoutDashboard, MessageCircle } from 'lucide-react';
+import { Bot, LayoutDashboard, MessageCircle, Bell } from 'lucide-react';
 import { Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
-import { Separator } from '@/components/ui/separator';
-
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -12,6 +10,7 @@ export function AppSidebar() {
   const menuItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, startsWith: '/dashboard' },
     { href: '/chatbot', label: 'Chat AI', icon: MessageCircle, startsWith: '/chatbot' },
+    { href: '/notifications', label: 'Notifications', icon: Bell, startsWith: '/notifications' },
   ];
 
   return (

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Bell } from "lucide-react";
+import Link from "next/link";
 
 export function Header() {
   return (
@@ -19,9 +20,11 @@ export function Header() {
             <span className="text-sm text-muted-foreground">Environment:</span>
             <Badge variant="outline" className="text-green-600 border-green-600 bg-green-50">Production</Badge>
         </div>
-        <Button variant="ghost" size="icon">
-          <Bell className="h-5 w-5" />
-          <span className="sr-only">Notifications</span>
+        <Button variant="ghost" size="icon" asChild>
+          <Link href="/notifications">
+            <Bell className="h-5 w-5" />
+            <span className="sr-only">Notifications</span>
+          </Link>
         </Button>
       </div>
     </header>
