@@ -64,7 +64,7 @@ export function ChatPageContent() {
   
   return (
     <div className="h-full flex flex-col p-4 sm:p-6 lg:p-8">
-      <Card className="flex-1 flex flex-col h-full">
+      <Card className="flex-1 flex flex-col h-full shadow-lg">
         <CardHeader>
           <CardTitle>Chat with AssetAI</CardTitle>
         </CardHeader>
