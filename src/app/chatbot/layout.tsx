@@ -10,7 +10,7 @@ export default function ChatbotLayout({ children }: { children: ReactNode }) {
             <AppSidebar />
             <div className="flex flex-col flex-1">
                 <Header />
-                <main className="flex-1">
+                <main className="flex-1 p-4 sm:p-6 lg:p-8">
                     {children}
                 </main>
             </div>
