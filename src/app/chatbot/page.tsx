@@ -25,8 +25,6 @@ const kpiData = [
     title: 'Assets Currently in Repair',
     value: '679 (34.0%)',
     icon: Hammer,
-    change: 'Critical',
-    changeType: 'increase' as const,
   },
   {
     title: 'Warranties Expiring (2025-2027)',
