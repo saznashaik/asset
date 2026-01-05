@@ -8,8 +8,8 @@ interface KpiCardProps {
     title: string;
     value: string;
     icon: LucideIcon;
-    change: string;
-    changeType: 'increase' | 'decrease';
+    change?: string;
+    changeType?: 'increase' | 'decrease';
 }
 
 export function KpiCard({ title, value, icon: Icon, change, changeType }: KpiCardProps) {
@@ -21,12 +21,12 @@ export function KpiCard({ title, value, icon: Icon, change, changeType }: KpiCar
             </CardHeader>
             <CardContent>
                 <div className="text-2xl font-bold">{value}</div>
-                <p className={cn(
-                    "text-xs text-muted-foreground",
-                    changeType === 'increase' ? 'text-red-500' : 'text-green-500'
+                {change && <p className={cn(
+                    "text-xs",
+                    changeType === 'increase' ? 'text-red-500 font-semibold' : 'text-green-500'
                 )}>
-                    {change} from last month
-                </p>
+                    {changeType === 'increase' && '🔴 '}{change}
+                </p>}
             </CardContent>
         </Card>
     );
